@@ -18,7 +18,7 @@ export class MonitorService implements OnModuleInit {
 
   startMonitoring() {
     cron.schedule('*/5 * * * *', async () => {
-      console.log('🔍 Checking websites...');
+      console.log(' Checking websites...');
 
       const websites = await this.websiteRepo.find();
 

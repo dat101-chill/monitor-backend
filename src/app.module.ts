@@ -14,7 +14,7 @@ import { MonitorModule } from './monitor/monitor.module';
       password: '12345',
       database: 'website_monitor',
       autoLoadEntities: true,
-      synchronize: false,
+      synchronize: true,
     }),
     ResponsibleModule,
     WebsitesModule,
