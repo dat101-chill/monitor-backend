@@ -13,25 +13,26 @@ export class WebsitesService {
     private readonly responsibleRepo: Repository<Responsible>,
   ) {}
 
-  async create(data: {
-    name: string;
-    url: string;
-    responsibleId: number;
-  }) {
-    const responsible = await this.responsibleRepo.findOneBy({
-      id: data.responsibleId,
+  async create(data: { name: string; url: string; responsibleId?: number }) {
+  const website = this.websiteRepo.create({
+    name: data.name,
+    url: data.url,
+  });
+
+  if (data.responsibleId) {
+    const responsible = await this.responsibleRepo.findOne({
+      where: { id: data.responsibleId },
     });
 
     if (!responsible) {
       throw new NotFoundException('Responsible not found');
     }
 
-    return this.websiteRepo.save({
-      name: data.name,
-      url: data.url,
-      responsible,
-    });
+    website.responsible = responsible;
   }
+
+  return this.websiteRepo.save(website);
+}
 
   findAll() {
     return this.websiteRepo.find({ relations: ['responsible'] });

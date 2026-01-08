@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { Responsible } from '../responsible/responsible.entity';
 
 @Entity('website')
@@ -6,21 +6,27 @@ export class Website {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @ManyToOne(() => Responsible, responsible => responsible.websites, {
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn({ name: 'responsibleId' })
+  responsible: Responsible;
+
   @Column()
   name: string;
 
   @Column()
   url: string;
-
+  
   @Column({ default: true })
-  isOnline: boolean;
+  isonline: boolean;
+
+  @Column({ default: 'UNKNOWN' })
+  status: string;
 
   @Column({ type: 'timestamp', nullable: true })
-  lastCheck: Date;
+  lastCheckedAt: Date;
 
-  @ManyToOne(() => Responsible, responsible => responsible.websites, {
-    onDelete: 'CASCADE',
-  })
-  @JoinColumn({ name: 'responsibleId' }) 
-  responsible: Responsible;
+  @Column({ type: 'int', nullable: true })
+  responseTime: number | null;
 }
