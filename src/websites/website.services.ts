@@ -13,15 +13,15 @@ export class WebsitesService {
     private readonly responsibleRepo: Repository<Responsible>,
   ) {}
 
-  async create(data: { name: string; url: string; responsibleId?: number }) {
+  async create(data: { name: string; url: string; responsibleid?: number }) {
   const website = this.websiteRepo.create({
     name: data.name,
     url: data.url,
   });
 
-  if (data.responsibleId) {
+  if (data.responsibleid) {
     const responsible = await this.responsibleRepo.findOne({
-      where: { id: data.responsibleId },
+      where: { id: data.responsibleid },
     });
 
     if (!responsible) {
