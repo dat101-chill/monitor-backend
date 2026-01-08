@@ -1,13 +1,17 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { MonitorService } from './monitor.services';
 import { Website } from '../websites/website.entity';
-import { MonitorController} from './monitor.controller';
+import { MonitorService } from './monitor.service';
+import { MonitorController } from './monitor.controller';
+import { TestMailController } from './test-mail.controller';
+import { MailService } from '../mail/mail.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Website])],
-
-  providers: [MonitorService],
-  controllers: [MonitorController],
+  controllers: [
+    MonitorController,
+    TestMailController, 
+  ],
+  providers: [MonitorService, MailService],
 })
 export class MonitorModule {}
