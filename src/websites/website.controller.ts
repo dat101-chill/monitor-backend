@@ -1,10 +1,11 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Put, Delete, Options } from '@nestjs/common';
 import { WebsitesService } from './website.services';
 
 @Controller('websites')
 export class WebsitesController {
   constructor(private readonly websitesService: WebsitesService) {}
-  @Option()
+
+   @Options()
   options() {
     return '';
   }
@@ -25,7 +26,7 @@ export class WebsitesController {
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() body) {
+  update(@Param('id') id: string, @Body() body: any) {
     return this.websitesService.update(+id, body);
   }
 
