@@ -20,11 +20,11 @@ export class CreateResponsibleAndWebsiteTables1700000000000
         id SERIAL PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
         url VARCHAR(500) NOT NULL,
-        "isOnline" BOOLEAN DEFAULT true,
+        "isonline" BOOLEAN DEFAULT true,
         "lastCheck" TIMESTAMP,
-        "responsibleId" INTEGER,
+        "responsibleid" INTEGER,
         CONSTRAINT fk_responsible
-          FOREIGN KEY ("responsibleId")
+          FOREIGN KEY ("responsibleid")
           REFERENCES responsible(id)
           ON DELETE CASCADE
       );
