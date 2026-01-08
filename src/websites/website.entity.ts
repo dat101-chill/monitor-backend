@@ -9,24 +9,32 @@ export class Website {
   @ManyToOne(() => Responsible, responsible => responsible.websites, {
     onDelete: 'CASCADE',
   })
-  @JoinColumn({ name: 'responsibleId' })
-  responsible: Responsible;
+  
+  @JoinColumn({ name: 'responsibleid' })
+  responsible?: Responsible;
+
+  @Column({ name: 'responsibleid', nullable: true })
+  responsibleId: number | null;
+
+  @Column({ name: 'isOnline', default: true })
+  isOnline: boolean;
+
+  @Column({ name: 'lastcheck', type: 'timestamp', nullable: true })
+  lastCheck: Date;
+
+  @Column({ length: 20, nullable: true })
+  status: string;
 
   @Column()
   name: string;
 
   @Column()
   url: string;
-  
-  @Column({ default: true })
-  isonline: boolean;
 
-  @Column({ default: 'UNKNOWN' })
-  status: string;
+  @Column({ name: 'responsetime', type: 'int', nullable: true })
+  responseTime: number| null;
 
   @Column({ type: 'timestamp', nullable: true })
   lastCheckedAt: Date;
 
-  @Column({ type: 'int', nullable: true })
-  responseTime: number | null;
 }
