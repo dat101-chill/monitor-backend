@@ -3,8 +3,8 @@ export function buildMonitorReport(websites) {
     <tr>
       <td>${w.name}</td>
       <td>${w.url}</td>
-      <td style="color:${w.isOnline ? 'green' : 'red'}">
-        ${w.isOnline ? 'ONLINE' : 'OFFLINE'}
+      <td style="color:${w.isonline ? 'green' : 'red'}">
+        ${w.isonline ? 'ONLINE' : 'OFFLINE'}
       </td>
       <td>${new Date(w.lastCheck).toLocaleString()}</td>
     </tr>
